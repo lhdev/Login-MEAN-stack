@@ -1,32 +1,46 @@
-
-    <div class="card">
-        <h2>LOGIN</h2>
-
-        <!-- SE CONNECTER / S'INSCRIRE -->
-        <div class="login_register">
-            <a href="
-             https://codepen.io/pen?template=gOEqMVq
-            " class="login" target="blank">Login</a>
-            <a href="
-            https://codepen.io/pen?template=VwRgKYB
-            " class="register" target="blank">Signup</a>
-        </div>
-
-        <!-- FORMULAIRE -->
-        <form class="form">
-            <input type="email" name="email" [(ngModel)]="requestLogin.email" placeholder="Email Adress" class="email">
-            <input type="password" name="password" [(ngModel)]="requestLogin.password" placeholder="Password" class="pass">
-        </form>
-
-        <!-- MOT DE PASSE OUBLIE ? -->
-        <a href="#" class="fp">Forgot password?</a>
-
-        <!-- BOUTTON LOGIN -->
-        <button type="button" (click)="onLogin()" class="login_btn">Login</button>
-
-        <!-- PIED DE LA CARD -->
-        <div class="footer_card">
-            <p>Not a member?</p>
-            <a href="#">Singup now</a>
-        </div>
+<div class="card" *ngIf="isLoginView">
+    <h2>LOGIN</h2>
+    <!-- SE CONNECTER -->
+    <div class="login_register">
+        <a 
+          href="#" 
+          class="login" 
+          [ngClass]="{'active': isLoginView}" 
+          (click)="switchToLogin($event)">Login
+        </a>
+        <a 
+          href="#" 
+          class="register" 
+          [ngClass]="{'active': !isLoginView}" 
+          (click)="switchToSignup($event)">Signup
+        </a>
     </div>
+    
+    
+    <!-- FORMULAIRE -->
+    <form class="form">
+        <input type="email" name="email" [(ngModel)]="requestLogin.email" placeholder="Email Address" class="email">
+        <input type="password" name="password" [(ngModel)]="requestLogin.password" placeholder="Password" class="pass">
+    </form>
+    <!-- MOT DE PASSE OUBLIE ? -->
+    <a href="#" class="fp">Forgot password?</a>
+    <!-- BOUTTON LOGIN -->
+    <button type="button" (click)="onLogin()" class="login_btn">Login</button>
+</div>
+
+<div class="card" *ngIf="!isLoginView">
+    <h2>SIGNUP</h2>
+    <!-- S'INSCRIRE -->
+    <div class="login_register">
+        <a href="#" class="login" (click)="switchToLogin($event)">Login</a>
+        <a href="#" class="signup" (click)="switchToSignup($event)">Signup</a>
+    </div>
+    <!-- FORMULAIRE -->
+    <form class="form">
+        <input type="text" name="Nome" placeholder="Nome" [(ngModel)]="requestSignup.name">
+        <input type="email" name="Email Address" placeholder="Email Address" [(ngModel)]="requestSignup.email">
+        <input type="password" name="Password" placeholder="Password" [(ngModel)]="requestSignup.password">
+    </form>
+    <!-- BOUTTON SIGNUP -->
+    <button type="button" (click)="onSignUp()" class="login_btn">Signup</button>
+</div>
